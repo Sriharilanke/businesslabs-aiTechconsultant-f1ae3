@@ -32,21 +32,21 @@ jobs:
 
       - name: Task 1 - Seed Database & Run 22 Evaluations
         run: |
-          cd task1-knowledge-brain
+          cd tasks/task1-knowledge-brain
           python -m seed_data.seed_knowledge
           python -m unittest tests/test_task1.py
           python -m evaluation.run_evals
 
       - name: Task 2 - Compile TypeScript & Run 22 Evaluations
         run: |
-          cd task2-inbox-agent
+          cd tasks/task2-inbox-agent
           npm ci
           npm run build
           npm test
 
       - name: Task 3 - Run Multi-Agent Unit Tests & 22 Evaluations
         run: |
-          cd task3-meeting-to-scope
+          cd tasks/task3-meeting-to-scope
           python -m unittest tests/test_task3.py
           python -m evaluation.run_evals
 

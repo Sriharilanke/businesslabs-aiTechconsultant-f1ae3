@@ -14,9 +14,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 
-TASK1_DIR = BASE_DIR / "task1-knowledge-brain"
-TASK2_DIR = BASE_DIR / "task2-inbox-agent"
-TASK3_DIR = BASE_DIR / "task3-meeting-to-scope"
+TASKS_DIR = BASE_DIR / "tasks"
+TASK1_DIR = TASKS_DIR / "task1-knowledge-brain" if (TASKS_DIR / "task1-knowledge-brain").exists() else BASE_DIR / "task1-knowledge-brain"
+TASK2_DIR = TASKS_DIR / "task2-inbox-agent" if (TASKS_DIR / "task2-inbox-agent").exists() else BASE_DIR / "task2-inbox-agent"
+TASK3_DIR = TASKS_DIR / "task3-meeting-to-scope" if (TASKS_DIR / "task3-meeting-to-scope").exists() else BASE_DIR / "task3-meeting-to-scope"
 FRONTEND_DIR = BASE_DIR / "frontend-dashboard"
 
 processes = []

@@ -3,9 +3,21 @@ node_modules/
 __pycache__/
 *.py[cod]
 *$py.class
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+coverage/
+*.tsbuildinfo
 
-# Logs & temp
+# Databases & Caches
+*.db
+*.sqlite
+*.sqlite3
 *.log
 .env
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+

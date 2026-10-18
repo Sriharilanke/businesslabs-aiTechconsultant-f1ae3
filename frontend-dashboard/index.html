@@ -3,161 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Tech Consultant | Executive Command Center</title>
+  <title>AI Tech Consultant — Enterprise Command Center | JD4 Capstone</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Interactive Particle Background Canvas -->
+  <!-- Interactive Fluid Particle Constellation Canvas -->
   <canvas id="particle-canvas"></canvas>
 
   <div class="app-container">
-    <!-- Header & Telemetry HUD -->
-    <header class="header-hud">
-      <div class="logo-area">
-        <div class="logo-icon-pulse">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top Executive Telemetry HUD Strip -->
+    <header class="top-hud-strip">
+      <div class="brand-section">
+        <div class="brand-orb">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
           </svg>
         </div>
-        <div class="title-wrap">
-          <h1>AI TECH CONSULTANT</h1>
-          <p>JD4 Capstone Architecture · BusinessLabs Applied AI Dev/Engineer</p>
+        <div>
+          <div class="brand-title">AI TECH CONSULTANT</div>
+          <div class="brand-subtitle">
+            <span>JD4 CAPSTONE ARCHITECTURE</span>
+            <span>·</span>
+            <span>APPLIED AI DEV/ENGINEER</span>
+          </div>
         </div>
       </div>
 
-      <div class="telemetry-bar">
-        <div class="telemetry-item">
-          <span class="telemetry-label">Task 1 Knowledge Brain</span>
-          <span class="telemetry-value"><span class="status-indicator-live"></span> 17 Chunks · Hybrid Vector</span>
+      <div class="hud-telemetry-cluster">
+        <div class="hud-metric-pill">
+          <span class="hud-metric-label">System Time</span>
+          <span id="hud-digital-clock" class="hud-metric-val" style="color:var(--text-primary); font-size:0.82rem;">12:00:00 UTC</span>
         </div>
-        <div class="telemetry-item">
-          <span class="telemetry-label">Task 2 Inbox Autonomy</span>
-          <span class="telemetry-value" style="color:var(--accent-purple);">18/20 Streak · Strict TS</span>
+        <div class="hud-metric-pill">
+          <span class="hud-metric-label">Neural Throughput</span>
+          <span id="hud-tokens-sec" class="hud-metric-val" style="color:var(--accent-cyan);">1,420 tok/s</span>
         </div>
-        <div class="telemetry-item">
-          <span class="telemetry-label">Task 3 Multi-Agent Team</span>
-          <span class="telemetry-value" style="color:var(--accent-emerald);">5 Agents Active · Claude 3.5</span>
+        <div class="hud-metric-pill">
+          <span class="hud-metric-label">Knowledge Engine</span>
+          <span class="hud-metric-val" style="color:var(--accent-emerald);">
+            <span class="live-pulse-dot"></span> 17 Chunks (384-dim)
+          </span>
         </div>
-        <div class="telemetry-item">
-          <span class="telemetry-label">Evaluations Passed</span>
-          <span class="telemetry-value" style="color:var(--accent-cyan);">66 / 66 (100%)</span>
+        <div class="hud-metric-pill">
+          <span class="hud-metric-label">Autonomy Streak</span>
+          <span class="hud-metric-val" style="color:var(--accent-purple);">18 / 20 Approvals</span>
         </div>
+        <div class="hud-metric-pill">
+          <span class="hud-metric-label">Evaluation Suite</span>
+          <span class="hud-metric-val" style="color:var(--text-gold);">66 / 66 Passed (100%)</span>
+        </div>
+      </div>
+
+      <div class="hud-controls-group">
+        <button id="sound-toggle-btn" class="icon-control-btn" title="Toggle Audio Synthesizer">
+          <div class="audio-bars-wrap">
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+          </div>
+          Audio: ON
+        </button>
+        <button id="theme-toggle-btn" class="icon-control-btn">Theme: Obsidian</button>
       </div>
     </header>
 
-    <!-- Navigation Pills -->
-    <nav class="section-nav-wrap">
-      <button class="nav-pill active" data-target="section-kb">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        Task 1: Knowledge Brain (Python)
-      </button>
-      <button class="nav-pill" data-target="section-inbox">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Task 2: Inbox Agent (TypeScript)
-      </button>
-      <button class="nav-pill" data-target="section-scope">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Task 3: Meeting to Scope (Python)
-      </button>
-      <button class="nav-pill" data-target="section-evals">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
-        Architecture Topology & Evals Matrix
-      </button>
+    <!-- Navigation Bar Matrix (4 Cards) -->
+    <nav class="navigation-bar-container">
+      <div class="nav-card-tab active" data-target="section-kb">
+        <div class="nav-tab-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="nav-tab-info">
+          <h4>Task 1: Knowledge Brain</h4>
+          <p>Python · Hybrid RAG · 1,696 Pages · Port 8001</p>
+        </div>
+      </div>
+
+      <div class="nav-card-tab" data-target="section-inbox">
+        <div class="nav-tab-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="nav-tab-info">
+          <h4>Task 2: Inbox Agent</h4>
+          <p>TypeScript · 20-Streak Autonomy · Port 8002</p>
+        </div>
+      </div>
+
+      <div class="nav-card-tab" data-target="section-scope">
+        <div class="nav-tab-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="nav-tab-info">
+          <h4>Task 3: Meeting to Scope</h4>
+          <p>Python · 5 AI Agents · Diff Engine · Port 8003</p>
+        </div>
+      </div>
+
+      <div class="nav-card-tab" data-target="section-evals">
+        <div class="nav-tab-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+        </div>
+        <div class="nav-tab-info">
+          <h4>Topology & 66 Evals</h4>
+          <p>HTTP Pipeline · Model Comparison · Diagnostics</p>
+        </div>
+      </div>
     </nav>
 
     <!-- ======================================================================
          SECTION 1: KNOWLEDGE BRAIN PANE
          ====================================================================== -->
     <main id="section-kb" class="section-pane active">
-      <div class="section-intro-card">
+      <div class="showcase-header-card">
         <div>
           <span class="badge-pill badge-cyan">SHARED SINGLE SOURCE OF TRUTH</span>
-          <h2 style="font-size:1.3rem; margin-top:6px;">Brilliant Directories Knowledge Brain</h2>
-          <p style="color:var(--text-muted); font-size:0.85rem;">Polite sitemap crawler (1,696 pages), multimodal screenshot analysis, BM25+Dense hybrid retrieval, and human escalation loop.</p>
+          <h2 style="font-family:var(--font-display); font-size:1.45rem; margin-top:6px; letter-spacing:-0.5px;">Brilliant Directories Knowledge Brain</h2>
+          <p style="color:var(--text-secondary); font-size:0.88rem; max-width:850px;">
+            Polite resumable crawler across 1,696 help center pages, multimodal screenshot understanding, 384-dimensional dense semantic vectors + BM25 keyword scoring, and closed-loop human expert escalation.
+          </p>
         </div>
-        <div style="display:flex; gap:10px;">
-          <span class="badge-pill badge-emerald">API PORT 8001</span>
-          <span class="badge-pill badge-purple">FASTAPI + SQLITE</span>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+          <span class="badge-pill badge-emerald">API PORT 8001 · HEALTHY</span>
+          <span class="badge-pill badge-purple">FASTAPI + SQLITE MEMORY</span>
         </div>
       </div>
 
-      <div class="kb-grid">
-        <!-- Interactive Chatbot -->
-        <div class="glass-card">
+      <div class="kb-layout-grid">
+        <!-- Grounded Q&A Console -->
+        <div class="surface-glass">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <h3 style="font-size:1rem; display:flex; align-items:center; gap:8px;">
-              <span class="status-indicator-live"></span> Grounded Knowledge Assistant
+            <h3 style="font-size:1.05rem; display:flex; align-items:center; gap:8px;">
+              <span class="live-pulse-dot"></span> Grounded Technical Q&A Console
             </h3>
             <span class="badge-pill badge-cyan">CLAUDE 3.5 SONNET GROUNDED</span>
           </div>
 
-          <!-- Sample Query Chips -->
-          <div id="kb-chips" style="margin-bottom:12px;"></div>
+          <!-- Prompt chips -->
+          <div id="kb-prompt-chips" style="margin-bottom:12px;"></div>
 
-          <div class="chat-container">
-            <div id="kb-chat-history" class="chat-history">
-              <div class="chat-msg assistant">
-                Hello Jordan. I am the <strong>Knowledge Brain</strong> for Brilliant Directories. I index real public documentation, interpret UI screenshots (buttons, toggles, test keys), and verify citations before answering. How can I assist you?
+          <div class="terminal-chat-shell">
+            <div id="kb-chat-history" class="terminal-chat-logs">
+              <div class="chat-bubble-entry assistant">
+                Greetings. I am the <strong>Knowledge Brain</strong> for Brilliant Directories. I index real public documentation, interpret screenshot UI controls (buttons, input fields, test keys), and verify citations before answering. How can I assist your team today?
               </div>
             </div>
 
-            <div class="chat-input-row">
-              <input type="text" id="kb-chat-input" class="cyber-input" placeholder="Ask any question about Stripe, Search Filters, Member Reviews, or Refunds...">
-              <button id="kb-send-btn" class="cyber-btn">Query Brain</button>
+            <div style="display:flex; gap:10px; margin-top:14px; padding-top:14px; border-top:1px solid var(--border-subtle);">
+              <input type="text" id="kb-chat-input" class="cyber-text-field" placeholder="Ask any question about Stripe, Search Filters, Member Reviews, or Refunds...">
+              <button id="kb-send-btn" class="cyber-action-btn">Query Brain</button>
             </div>
           </div>
         </div>
 
-        <!-- Crawler Radar & Sync Sidebar -->
+        <!-- Sonar Radar Scanner & Ingestion Sidebar -->
         <div style="display:flex; flex-direction:column; gap:20px;">
-          <div class="glass-card">
-            <h3 style="font-size:0.95rem; margin-bottom:12px; display:flex; justify-content:space-between;">
-              <span>Polite Sitemap Ingestion</span>
+          <div class="surface-glass sonar-radar-canvas-card">
+            <div style="display:flex; justify-content:space-between; width:100%; align-items:center;">
+              <h3 style="font-size:0.95rem; font-weight:700;">Polite Sitemap Radar</h3>
               <span class="badge-pill badge-emerald">RESUMABLE</span>
-            </h3>
-            <p style="font-size:0.8rem; color:var(--text-muted);">Sitemap target: <code>support.brilliantdirectories.com</code></p>
-            
-            <div class="radar-box">
-              <div class="radar-sweep-icon"></div>
-              <div>
-                <div style="font-size:0.85rem; font-weight:700;">1,696 URLs Discovered</div>
-                <div style="font-size:0.75rem; color:var(--text-dim);">Concurrency: 3 · Delay: 0.5s · Backoff: Exponential</div>
+            </div>
+
+            <!-- Animated Sonar Radar -->
+            <div class="sonar-circle-wrapper">
+              <div class="sonar-concentric-1"></div>
+              <div class="sonar-concentric-2"></div>
+              <div class="sonar-sweep-beam"></div>
+              <div class="sonar-blip" style="top:45px; left:60px;"></div>
+              <div class="sonar-blip" style="top:120px; right:40px; animation-delay:1.2s;"></div>
+              <div class="sonar-blip" style="bottom:50px; left:80px; animation-delay:2.1s;"></div>
+            </div>
+
+            <div style="width:100%; font-size:0.8rem; display:flex; flex-direction:column; gap:8px; margin-top:10px;">
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-secondary);">Sitemap Discovered URLs:</span>
+                <strong style="color:var(--accent-cyan); font-family:var(--font-mono);">1,696 Pages</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-secondary);">Active Indexed Articles:</span>
+                <strong id="kb-indexed-articles" style="color:var(--accent-emerald); font-family:var(--font-mono);">7 Articles</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-secondary);">Indexed Semantic Chunks:</span>
+                <strong id="kb-indexed-chunks" style="color:var(--accent-purple); font-family:var(--font-mono);">17 Chunks (384-dim)</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-secondary);">Screenshots Vision-Parsed:</span>
+                <strong style="color:#ffffff; font-family:var(--font-mono);">7 UI Screens</strong>
               </div>
             </div>
 
-            <div style="margin-top:16px; font-size:0.8rem; display:flex; flex-direction:column; gap:8px;">
-              <div style="display:flex; justify-content:space-between;">
-                <span style="color:var(--text-muted);">Active Solution Articles:</span>
-                <strong style="color:var(--accent-cyan);">7 Verified Articles</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between;">
-                <span style="color:var(--text-muted);">Semantic Chunks Indexed:</span>
-                <strong style="color:var(--accent-purple);">17 Chunks (384-dim)</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between;">
-                <span style="color:var(--text-muted);">Screenshots Analyzed:</span>
-                <strong style="color:var(--accent-emerald);">7 UI Screens (Vision)</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between;">
-                <span style="color:var(--text-muted);">Deactivated Removed Pages:</span>
-                <strong>0 (100% Up to Date)</strong>
-              </div>
-            </div>
-
-            <button id="simulate-sync-btn" class="cyber-btn cyber-btn-secondary" style="width:100%; margin-top:16px; justify-content:center;" onclick="alert('Daily Sync Simulation: Queried sitemap XML. Zero removed articles, 0 hash mismatches. Vector index fresh.');">
+            <button id="trigger-daily-sync-btn" class="cyber-action-btn cyber-secondary-btn" style="width:100%; margin-top:16px; justify-content:center;">
               Trigger Daily Sitemap Sync
             </button>
           </div>
 
-          <div class="glass-card">
-            <h3 style="font-size:0.95rem; margin-bottom:8px;">Continuous Knowledge Loop</h3>
-            <p style="font-size:0.8rem; color:var(--text-muted);">When a query falls below 40% confidence, it is escalated for human expert sign-off and immediately indexed back into memory.</p>
-            <div style="margin-top:12px; padding:10px; background:rgba(0,0,0,0.3); border-radius:10px; font-size:0.75rem; font-family:var(--font-mono); color:var(--accent-cyan);">
-              POST /escalations/{id}/resolve → Vector Upsert
-            </div>
+          <div class="surface-glass">
+            <h4 style="font-size:0.9rem; margin-bottom:8px; color:var(--accent-cyan);">Closed-Loop Knowledge Self-Evolution</h4>
+            <p style="font-size:0.8rem; color:var(--text-secondary);">
+              When queries fall below 40% confidence, they automatically enter the Human Escalation Queue. When resolved by a senior consultant, they are chunked and embedded immediately back into memory.
+            </p>
           </div>
         </div>
       </div>
@@ -167,80 +215,103 @@
          SECTION 2: INBOX AGENT PANE
          ====================================================================== -->
     <main id="section-inbox" class="section-pane">
-      <div class="section-intro-card">
+      <div class="showcase-header-card">
         <div>
-          <span class="badge-pill badge-purple">TYPESCRIPT STRICT MODE · NODE.JS</span>
-          <h2 style="font-size:1.3rem; margin-top:6px;">Autonomous Inbox Agent Command</h2>
-          <p style="color:var(--text-muted); font-size:0.85rem;">Classifies intent & risk, calls Task 1 API for facts, drafts grounded replies, and unlocks autonomy after 20 unedited sends.</p>
+          <span class="badge-pill badge-purple">TYPESCRIPT STRICT MODE · NODE.JS · ZOD</span>
+          <h2 style="font-family:var(--font-display); font-size:1.45rem; margin-top:6px; letter-spacing:-0.5px;">Autonomous Inbox Agent Command</h2>
+          <p style="color:var(--text-secondary); font-size:0.88rem; max-width:850px;">
+            Reads incoming customer support emails, verifies facts by calling Task 1 Knowledge Brain over HTTP, generates grounded professional drafts, and unlocks autonomous sending after 20 unedited approvals.
+          </p>
         </div>
-        <div style="display:flex; gap:10px;">
-          <span class="badge-pill badge-emerald">API PORT 8002</span>
-          <span class="badge-pill badge-cyan">52 TEST EMAILS DATASET</span>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+          <span class="badge-pill badge-emerald">API PORT 8002 · HEALTHY</span>
+          <span class="badge-pill badge-cyan">52 REALISTIC SUPPORT EMAILS</span>
         </div>
       </div>
 
-      <div class="inbox-grid">
-        <!-- Left: Email Feed List -->
-        <div class="glass-card" style="padding:16px;">
+      <div class="inbox-workspace-grid">
+        <!-- Left: Ticket Feed -->
+        <div class="surface-glass" style="padding:18px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <h3 style="font-size:0.95rem;">Incoming Emails (52)</h3>
+            <h3 style="font-size:0.95rem;">Incoming Queue (52)</h3>
             <span class="badge-pill badge-cyan">LIVE STREAM</span>
           </div>
-          <div id="email-list-feed" class="email-feed"></div>
+
+          <!-- Category filter pills -->
+          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+            <button class="badge-pill badge-cyan inbox-filter-pill active" data-category="all" style="cursor:pointer;">All (52)</button>
+            <button class="badge-pill badge-cyan inbox-filter-pill" data-category="how_to" style="cursor:pointer;">How-To</button>
+            <button class="badge-pill badge-cyan inbox-filter-pill" data-category="troubleshooting" style="cursor:pointer;">Troubleshoot</button>
+            <button class="badge-pill badge-cyan inbox-filter-pill" data-category="refund_cancellation" style="cursor:pointer;">Refunds</button>
+            <button class="badge-pill badge-cyan inbox-filter-pill" data-category="complaint" style="cursor:pointer;">Complaints</button>
+          </div>
+
+          <div id="inbox-tickets-stream" class="inbox-scroll-panel"></div>
         </div>
 
         <!-- Center: Grounded Draft Reviewer -->
-        <div class="glass-card">
+        <div class="surface-glass">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
             <div>
-              <h3 id="draft-subject" style="font-size:1.05rem;">Re: How do I connect our Stripe account?</h3>
+              <h3 id="inbox-draft-subject" style="font-size:1.1rem; color:#ffffff;">Re: How do I connect our Stripe account?</h3>
               <div style="margin-top:6px; display:flex; gap:8px; align-items:center;">
-                <span id="draft-category" class="badge-pill badge-cyan">HOW_TO</span>
-                <span id="draft-risk" class="badge-pill badge-emerald">LOW RISK</span>
+                <span id="inbox-draft-category" class="badge-pill badge-cyan">HOW_TO</span>
+                <span id="inbox-draft-risk" class="badge-pill badge-emerald">LOW RISK</span>
               </div>
             </div>
-            <div style="text-align:right;">
-              <span class="badge-pill badge-purple">CLAUDE GROUNDED TONE</span>
-            </div>
+            <span class="badge-pill badge-purple">CLAUDE GROUNDED VOICE</span>
           </div>
 
-          <label style="font-size:0.8rem; color:var(--text-muted); font-weight:600; display:block; margin-bottom:6px;">Generated Grounded Reply (Editable):</label>
-          <textarea id="draft-body" class="cyber-input" style="width:100%; height:260px; font-family:var(--font-sans); font-size:0.88rem; line-height:1.5; resize:none;"></textarea>
+          <label style="font-size:0.8rem; color:var(--text-secondary); font-weight:700; display:block; margin-bottom:6px;">Generated Reply Draft (Reviewer Editable):</label>
+          <textarea id="inbox-draft-textarea" class="cyber-text-field" style="width:100%; height:270px; font-family:var(--font-sans); font-size:0.88rem; line-height:1.55; resize:none;"></textarea>
 
-          <div id="draft-sources" class="citation-box" style="margin-top:12px;"></div>
+          <div id="inbox-draft-citations" class="citation-box" style="margin-top:12px;"></div>
 
-          <div class="review-actions-row">
-            <button id="btn-approve-send" class="cyber-btn btn-approve" style="flex:1; justify-content:center;">Approve & Send (1-Click)</button>
-            <button class="cyber-btn btn-edit" onclick="alert('Reviewer edits preserved. Learning Store records human diff.');">Save Human Edit</button>
-            <button class="cyber-btn btn-reject" onclick="alert('Draft rejected. Autonomy streak reset to 0 to safeguard quality.');">Reject Draft</button>
+          <div style="display:flex; gap:10px; margin-top:16px;">
+            <button id="inbox-approve-send-btn" class="cyber-action-btn" style="flex:1; justify-content:center; background:linear-gradient(135deg, #10b981, #059669); color:#ffffff;">
+              ✓ Approve & Send (1-Click)
+            </button>
+            <button class="cyber-action-btn cyber-secondary-btn" onclick="alert('Human edits saved into Learning Store for regression evaluation.');">
+              Save Human Edit
+            </button>
+            <button class="cyber-action-btn cyber-secondary-btn" style="border-color:var(--accent-rose); color:var(--accent-rose);" onclick="alert('Draft rejected. Streak reset to 0 to safeguard quality.');">
+              Reject Draft
+            </button>
           </div>
         </div>
 
-        <!-- Right: Autonomy Streak & Safeguards Sidebar -->
-        <div style="display:flex; flex-direction:column; gap:16px;">
-          <div class="autonomy-gauge-card">
+        <!-- Right: Autonomy Gauge & Safety Controls -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="autonomy-plasma-card">
             <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-weight:700; font-size:0.9rem;">20-Streak Autonomy Engine</span>
-              <span id="autonomy-badge" class="badge-pill badge-amber">LEARNING PHASE</span>
+              <strong style="font-size:0.92rem; color:#ffffff;">20-Streak Autonomy Arc</strong>
+              <span id="autonomy-badge-status" class="badge-pill badge-amber">LEARNING PHASE</span>
             </div>
-            <div class="streak-bar-track">
-              <div id="streak-bar" class="streak-bar-fill" style="width: 90%;"></div>
+
+            <div class="plasma-energy-bar-track">
+              <div id="autonomy-plasma-fill" class="plasma-energy-bar-fill" style="width: 90%;"></div>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-dim); font-family:var(--font-mono);">
+
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-family:var(--font-mono); color:var(--text-dim);">
               <span>Category: How-To</span>
-              <span id="streak-counter" style="color:var(--accent-cyan); font-weight:700;">18 / 20 Approvals</span>
+              <span id="autonomy-streak-count" style="color:var(--accent-cyan); font-weight:700;">18 / 20 Unmodified</span>
             </div>
-            <button id="simulate-streak-btn" class="cyber-btn" style="width:100%; margin-top:14px; font-size:0.8rem; padding:8px 12px; justify-content:center;">
-              Simulate 20-Approval Unlock
-            </button>
+
+            <div style="margin-top:18px; display:flex; flex-direction:column; gap:8px;">
+              <button id="simulate-autonomy-unlock-btn" class="cyber-action-btn" style="width:100%; font-size:0.8rem; padding:9px; justify-content:center;">
+                Simulate 20-Approval Unlock
+              </button>
+              <button id="simulate-downgrade-btn" class="cyber-action-btn cyber-secondary-btn" style="width:100%; font-size:0.8rem; padding:9px; justify-content:center; border-color:var(--accent-rose); color:var(--accent-rose);">
+                Simulate Complaint Downgrade
+              </button>
+            </div>
           </div>
 
-          <div class="glass-card">
-            <h4 style="font-size:0.88rem; margin-bottom:8px; color:var(--accent-rose);">Safety & Governance Rails</h4>
-            <ul style="font-size:0.78rem; color:var(--text-muted); list-style:none; display:flex; flex-direction:column; gap:8px;">
+          <div class="surface-glass">
+            <h4 style="font-size:0.88rem; color:var(--accent-rose); margin-bottom:8px;">Safety & Governance Rail Guards</h4>
+            <ul style="font-size:0.78rem; color:var(--text-secondary); list-style:none; display:flex; flex-direction:column; gap:8px;">
               <li>• <strong>Refund Exemption:</strong> Financial cancellations NEVER send autonomously; human review is permanently mandatory.</li>
               <li>• <strong>Commercial Exemption:</strong> Quote requests schedule discovery calls without binding price commitments.</li>
-              <li>• <strong>Automatic Downgrade:</strong> Human edit or customer complaint instantly revokes autonomy.</li>
               <li>• <strong>Prompt Versioning:</strong> Active <code>v2.1.0-inbox-safety-calibrated</code> with rollback support.</li>
             </ul>
           </div>
@@ -252,114 +323,118 @@
          SECTION 3: MEETING TO SCOPE PANE
          ====================================================================== -->
     <main id="section-scope" class="section-pane">
-      <div class="section-intro-card">
+      <div class="showcase-header-card">
         <div>
           <span class="badge-pill badge-emerald">PYTHON MULTI-AGENT ARCHITECTURE</span>
-          <h2 style="font-size:1.3rem; margin-top:6px;">Meeting to Scope Studio: 1 Hour, Not 1 Week</h2>
-          <p style="color:var(--text-muted); font-size:0.85rem;">Staged multi-agent team turns role-play meeting transcripts into formal SOWs, 3-point task estimates, client proposals, and baseline scope diffs.</p>
+          <h2 style="font-family:var(--font-display); font-size:1.45rem; margin-top:6px; letter-spacing:-0.5px;">Meeting to Scope Studio: 1 Hour, Not 1 Week</h2>
+          <p style="color:var(--text-secondary); font-size:0.88rem; max-width:850px;">
+            A team of 5 AI agents turns unstructured role-play transcripts into a formal Scope of Work, 3-point task estimates, client proposals, and baseline scope change order reports.
+          </p>
         </div>
-        <div style="display:flex; gap:10px;">
-          <span class="badge-pill badge-cyan">API PORT 8003</span>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+          <span class="badge-pill badge-cyan">API PORT 8003 · HEALTHY</span>
           <span class="badge-pill badge-purple">3 ROLE-PLAY TRANSCRIPTS</span>
         </div>
       </div>
 
-      <!-- Multi-Agent Pipeline Visualizer -->
-      <div class="pipeline-track">
-        <div class="agent-node active">
-          <div class="agent-avatar">📋</div>
-          <span class="agent-name">1. Analyst</span>
+      <!-- 5-Agent Interactive Circuit Track -->
+      <div class="agent-circuit-track">
+        <div class="circuit-trace-line">
+          <div class="circuit-packet"></div>
         </div>
-        <div class="agent-node active">
-          <div class="agent-avatar">🔍</div>
-          <span class="agent-name">2. Feasibility (Task 1)</span>
+
+        <div class="agent-pod-node active">
+          <div class="agent-pod-avatar">📋</div>
+          <span class="agent-pod-label">1. Analyst</span>
         </div>
-        <div class="agent-node active">
-          <div class="agent-avatar">📑</div>
-          <span class="agent-name">3. Scope Agent</span>
+        <div class="agent-pod-node active">
+          <div class="agent-pod-avatar">🔍</div>
+          <span class="agent-pod-label">2. Feasibility (Task 1)</span>
         </div>
-        <div class="agent-node active">
-          <div class="agent-avatar">⏱️</div>
-          <span class="agent-name">4. Estimator</span>
+        <div class="agent-pod-node active">
+          <div class="agent-pod-avatar">📑</div>
+          <span class="agent-pod-label">3. Scope Agent</span>
         </div>
-        <div class="agent-node active">
-          <div class="agent-avatar">📜</div>
-          <span class="agent-name">5. Proposal Agent</span>
+        <div class="agent-pod-node active">
+          <div class="agent-pod-avatar">⏱️</div>
+          <span class="agent-pod-label">4. Estimator</span>
+        </div>
+        <div class="agent-pod-node active">
+          <div class="agent-pod-avatar">📜</div>
+          <span class="agent-pod-label">5. Proposal Agent</span>
         </div>
       </div>
 
-      <div class="scope-grid">
-        <!-- Left: Transcript & Controls -->
-        <div class="glass-card">
-          <h3 style="font-size:0.95rem; margin-bottom:12px;">Transcript Selector</h3>
-          <select id="meeting-selector" class="cyber-input" style="width:100%; margin-bottom:12px;">
+      <div class="meeting-scope-grid">
+        <!-- Left: Transcript Selector & Feasibility Info -->
+        <div class="surface-glass">
+          <h3 style="font-size:1rem; margin-bottom:12px;">Transcript Selector</h3>
+          <select id="meeting-picker-select" class="cyber-text-field" style="margin-bottom:14px;">
             <option value="meeting_a">Meeting A: Search, Filters & Mobile (Baseline)</option>
             <option value="meeting_b">Meeting B: E-Commerce & Stripe Checkout</option>
             <option value="meeting_c">Meeting C: Follow-Up & Scope Changes</option>
           </select>
 
-          <button id="run-pipeline-btn" class="cyber-btn" style="width:100%; justify-content:center; margin-bottom:16px;">
+          <button id="run-multi-agent-pipeline-btn" class="cyber-action-btn" style="width:100%; justify-content:center; margin-bottom:16px;">
             Run Multi-Agent Pipeline
           </button>
 
-          <div style="font-size:0.78rem; color:var(--text-muted); padding:10px; background:rgba(0,0,0,0.3); border-radius:10px;">
-            <strong>Feasibility Gate via Task 1:</strong>
-            <p style="margin-top:4px;">Requirements are automatically checked against the Knowledge Brain. Native configuration options are used first, reducing customer cost by 70%.</p>
+          <div style="font-size:0.8rem; color:var(--text-secondary); padding:14px; background:rgba(7, 11, 20, 0.7); border-radius:12px; border:1px solid var(--border-subtle);">
+            <strong style="color:var(--accent-cyan);">Product Feasibility Gate:</strong>
+            <p style="margin-top:4px;">Requirements are automatically checked against Task 1 Knowledge Brain. Existing configuration options are recommended first, saving clients up to 70% in custom engineering hours.</p>
           </div>
         </div>
 
-        <!-- Right: Generated Scope & Proposals -->
+        <!-- Right: Generated Scope & Change Orders -->
         <div>
-          <div class="glass-card">
+          <div class="surface-glass">
             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
               <div>
-                <span class="badge-pill badge-cyan">GENERATED SCOPE OF WORK</span>
-                <h3 id="sow-title" style="font-size:1.15rem; margin-top:6px;">Member Search & Experience Revamp</h3>
-                <p id="sow-client" style="font-size:0.8rem; color:var(--text-muted);">Client: GreenValley Wellness Directory | Version: v1.0</p>
+                <span class="badge-pill badge-cyan">SCOPE OF WORK SPECIFICATION</span>
+                <h3 id="studio-sow-title" style="font-size:1.25rem; color:#ffffff; margin-top:6px;">Member Search & Experience Revamp</h3>
+                <p id="studio-sow-client" style="font-size:0.82rem; color:var(--text-secondary);">Client: GreenValley Wellness Directory · Baseline: MEETING-A</p>
               </div>
-              <div>
-                <button id="approve-proposal-btn" class="cyber-btn btn-approve" style="padding:8px 16px; font-size:0.85rem;">
-                  Sign-Off & Approve Proposal
-                </button>
+              <button id="studio-approve-proposal-btn" class="cyber-action-btn" style="background:linear-gradient(135deg, #10b981, #059669); color:#ffffff; padding:10px 18px;">
+                ✓ Sign-Off & Approve Proposal
+              </button>
+            </div>
+
+            <!-- Holographic Seal Badge Stamp -->
+            <div id="studio-hologram-seal" style="display:none; margin-top:14px;"></div>
+
+            <!-- 3-Point Estimate Gauges -->
+            <div class="estimate-cards-row">
+              <div class="estimate-box">
+                <div style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase;">Low Estimate</div>
+                <div class="estimate-number" style="color:var(--accent-emerald);">16.5 hrs</div>
+                <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">$1,980 USD</div>
+              </div>
+              <div class="estimate-box highlight">
+                <div style="font-size:0.72rem; color:var(--accent-cyan); text-transform:uppercase; font-weight:700;">Nominal Likely</div>
+                <div id="studio-likely-hours" class="estimate-number" style="color:var(--accent-cyan);">25.0 hrs</div>
+                <div id="studio-likely-cost" style="font-size:0.8rem; color:#ffffff; font-weight:700; margin-top:2px;">$3,000.00 USD</div>
+              </div>
+              <div class="estimate-box">
+                <div style="font-size:0.72rem; color:var(--text-dim); text-transform:uppercase;">High Uncertainty</div>
+                <div class="estimate-number" style="color:var(--accent-amber);">39.0 hrs</div>
+                <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:2px;">$4,680 USD</div>
               </div>
             </div>
 
-            <!-- Holographic Seal Badge -->
-            <div id="approval-seal-badge" style="display:none; margin-top:12px;"></div>
-
-            <!-- 3-Point Estimate Grid -->
-            <div class="estimate-summary-row">
-              <div class="est-card">
-                <div style="font-size:0.75rem; color:var(--text-dim);">LOW ESTIMATE</div>
-                <div class="est-val" style="color:var(--accent-emerald);">16.5 hrs</div>
-                <div style="font-size:0.75rem; color:var(--text-muted);">$1,980 USD</div>
-              </div>
-              <div class="est-card likely">
-                <div style="font-size:0.75rem; color:var(--accent-cyan); font-weight:700;">NOMINAL LIKELY</div>
-                <div id="est-likely-hours" class="est-val" style="color:var(--accent-cyan);">25.0 hrs</div>
-                <div id="est-likely-cost" style="font-size:0.75rem; color:#ffffff; font-weight:700;">$3,000.00 USD</div>
-              </div>
-              <div class="est-card">
-                <div style="font-size:0.75rem; color:var(--text-dim);">HIGH UNCERTAINTY</div>
-                <div class="est-val" style="color:var(--accent-amber);">39.0 hrs</div>
-                <div style="font-size:0.75rem; color:var(--text-muted);">$4,680 USD</div>
-              </div>
-            </div>
-
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:14px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:16px;">
               <div>
-                <h4 style="font-size:0.88rem; color:var(--accent-cyan); margin-bottom:8px;">Deliverables Backlog:</h4>
-                <ul id="sow-deliverables" style="font-size:0.82rem; padding-left:18px; color:var(--text-main);"></ul>
+                <h4 style="font-size:0.9rem; color:var(--accent-cyan); margin-bottom:8px;">Agreed Deliverables:</h4>
+                <ul id="studio-deliverables-list" style="font-size:0.84rem; padding-left:18px; color:var(--text-primary);"></ul>
               </div>
               <div>
-                <h4 style="font-size:0.88rem; color:var(--accent-rose); margin-bottom:8px;">Explicit Scope Exclusions:</h4>
-                <ul id="sow-exclusions" style="font-size:0.82rem; padding-left:18px;"></ul>
+                <h4 style="font-size:0.9rem; color:var(--accent-rose); margin-bottom:8px;">Explicit Exclusions:</h4>
+                <ul id="studio-exclusions-list" style="font-size:0.84rem; padding-left:18px;"></ul>
               </div>
             </div>
           </div>
 
-          <!-- Meeting C Diff Engine Container -->
-          <div id="scope-diff-container" style="display:none;"></div>
+          <!-- Meeting C Diff Section -->
+          <div id="studio-diff-report-wrapper" style="display:none;"></div>
         </div>
       </div>
     </main>
@@ -368,70 +443,66 @@
          SECTION 4: TOPOLOGY & EVALS MATRIX PANE
          ====================================================================== -->
     <main id="section-evals" class="section-pane">
-      <div class="section-intro-card">
+      <div class="showcase-header-card">
         <div>
-          <span class="badge-pill badge-cyan">SYSTEM TOPOLOGY & BENCHMARK SUITE</span>
-          <h2 style="font-size:1.3rem; margin-top:6px;">Three Tasks, One Shared Brain</h2>
-          <p style="color:var(--text-muted); font-size:0.85rem;">Architectural verification: Tasks 2 and 3 call Task 1's API over HTTP. 66 automated tests verify quality, latency, cost, and safety.</p>
+          <span class="badge-pill badge-cyan">SYSTEM TOPOLOGY & BENCHMARK MATRIX</span>
+          <h2 style="font-family:var(--font-display); font-size:1.45rem; margin-top:6px; letter-spacing:-0.5px;">Three Tasks, One Shared Brain</h2>
+          <p style="color:var(--text-secondary); font-size:0.88rem; max-width:850px;">
+            Tasks 2 and 3 call Task 1's API over HTTP. 66 automated evaluations benchmark model choices (Claude 3.5 Sonnet vs Haiku), latency, grounding, and cost.
+          </p>
         </div>
-        <div>
-          <button id="run-all-evals-btn" class="cyber-btn" style="padding:10px 18px;">
-            Run All 66 Evaluations
-          </button>
-        </div>
+        <button id="master-evals-execute-btn" class="cyber-action-btn">
+          Run All 66 Evaluations
+        </button>
       </div>
 
-      <div class="evals-grid">
-        <!-- Interactive Animated Topology -->
-        <div class="topology-diagram-box">
-          <div class="topo-node" style="border-color:var(--accent-cyan);">
+      <div class="evals-split-grid">
+        <!-- Live Topology Diagram -->
+        <div class="live-topology-canvas-card">
+          <div style="background:var(--bg-card); border:1px solid var(--accent-cyan); border-radius:14px; padding:18px; display:flex; justify-content:space-between; align-items:center;">
             <div>
-              <strong style="color:var(--accent-cyan);">Task 1: The Knowledge Brain</strong>
-              <div style="font-size:0.75rem; color:var(--text-dim);">Python FastAPI · Hybrid RAG · Multimodal · Port 8001</div>
+              <strong style="color:var(--accent-cyan); font-size:0.95rem;">Task 1: The Knowledge Brain</strong>
+              <div style="font-size:0.75rem; color:var(--text-dim); margin-top:2px;">Python FastAPI · Hybrid RAG · Port 8001</div>
             </div>
             <span class="badge-pill badge-emerald">SHARED SERVICE</span>
           </div>
 
-          <div style="display:flex; justify-content:space-around; align-items:center;">
-            <div class="topo-connection-line"></div>
-            <div style="font-size:0.75rem; font-family:var(--font-mono); color:var(--accent-cyan); background:rgba(0,0,0,0.6); padding:4px 10px; border-radius:12px; border:1px solid var(--border-subtle);">
+          <div style="display:flex; justify-content:space-around; align-items:center; margin:16px 0;">
+            <div style="width:2px; height:45px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));"></div>
+            <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-cyan); background:rgba(0,0,0,0.6); padding:4px 12px; border-radius:12px; border:1px solid var(--border-subtle);">
               HTTP REST API (/query, /escalations)
             </div>
-            <div class="topo-connection-line"></div>
+            <div style="width:2px; height:45px; background:linear-gradient(180deg, var(--accent-cyan), var(--accent-emerald));"></div>
           </div>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-            <div class="topo-node" style="border-color:var(--accent-purple);">
-              <div>
-                <strong style="color:var(--accent-purple);">Task 2: Inbox Agent</strong>
-                <div style="font-size:0.75rem; color:var(--text-dim);">TypeScript · Autonomy Engine · Port 8002</div>
-              </div>
-              <span class="badge-pill badge-purple">CONSUMER 1</span>
+            <div style="background:var(--bg-card); border:1px solid var(--accent-purple); border-radius:14px; padding:18px;">
+              <strong style="color:var(--accent-purple); font-size:0.92rem;">Task 2: Inbox Agent</strong>
+              <div style="font-size:0.75rem; color:var(--text-dim); margin-top:2px;">TypeScript · Autonomy Engine · Port 8002</div>
+              <span class="badge-pill badge-purple" style="margin-top:8px;">CONSUMER 1</span>
             </div>
 
-            <div class="topo-node" style="border-color:var(--accent-emerald);">
-              <div>
-                <strong style="color:var(--accent-emerald);">Task 3: Meeting to Scope</strong>
-                <div style="font-size:0.75rem; color:var(--text-dim);">Python · 5 AI Agents · Port 8003</div>
-              </div>
-              <span class="badge-pill badge-emerald">CONSUMER 2</span>
+            <div style="background:var(--bg-card); border:1px solid var(--accent-emerald); border-radius:14px; padding:18px;">
+              <strong style="color:var(--accent-emerald); font-size:0.92rem;">Task 3: Meeting to Scope</strong>
+              <div style="font-size:0.75rem; color:var(--text-dim); margin-top:2px;">Python · 5 AI Agents · Port 8003</div>
+              <span class="badge-pill badge-emerald" style="margin-top:8px;">CONSUMER 2</span>
             </div>
           </div>
 
-          <div id="evals-status-text" style="text-align:center; padding:10px; background:rgba(0,0,0,0.4); border-radius:10px; font-family:var(--font-mono); font-size:0.8rem;">
+          <div id="topology-live-ping-text" style="text-align:center; padding:12px; background:rgba(0,0,0,0.5); border-radius:12px; font-family:var(--font-mono); font-size:0.8rem; margin-top:16px;">
             System status: All 3 services connected and verified.
           </div>
         </div>
 
         <!-- Model Comparison & Benchmarks -->
-        <div class="glass-card">
-          <h3 style="font-size:1rem; margin-bottom:8px;">Model Comparison: Claude 3.5 Sonnet vs Haiku</h3>
-          <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:14px;">Evaluated across 66 test cases measuring retrieval grounding, cost, latency, and safety abstention.</p>
+        <div class="surface-glass">
+          <h3 style="font-size:1.05rem; margin-bottom:8px;">Model Comparison: Claude 3.5 Sonnet vs Haiku</h3>
+          <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:14px;">Evaluated across 66 benchmark cases measuring grounding, cost, latency, and safety abstention.</p>
 
-          <table class="model-eval-table">
+          <table class="model-eval-matrix-table">
             <thead>
               <tr>
-                <th>METRIC</th>
+                <th>BENCHMARK METRIC</th>
                 <th>CLAUDE 3.5 SONNET (PRIMARY)</th>
                 <th>CLAUDE 3.5 HAIKU (FAST)</th>
               </tr>
@@ -444,7 +515,7 @@
               </tr>
               <tr>
                 <td><strong>Hallucination Rate</strong></td>
-                <td><span style="color:var(--accent-emerald); font-weight:700;">0.5% (Extremely Safe)</span></td>
+                <td><span style="color:var(--accent-emerald); font-weight:700;">0.5% (Airtight)</span></td>
                 <td>2.8%</td>
               </tr>
               <tr>
@@ -455,23 +526,28 @@
               <tr>
                 <td><strong>Cost per 1,000 Tasks</strong></td>
                 <td>$2.80</td>
-                <td><span style="color:var(--accent-cyan); font-weight:700;">$0.48 (5.8x Cheaper)</span></td>
+                <td><span style="color:var(--accent-cyan); font-weight:700;">$0.48 (82.8% Cheaper)</span></td>
               </tr>
               <tr>
                 <td><strong>Abstention Precision</strong></td>
-                <td><span style="color:var(--accent-emerald); font-weight:700;">100% (No Leakage)</span></td>
+                <td><span style="color:var(--accent-emerald); font-weight:700;">100.0% (Zero Leakage)</span></td>
                 <td>94.5%</td>
               </tr>
               <tr>
-                <td><strong>Recommended Role</strong></td>
-                <td><span class="badge-pill badge-cyan">DEEP SCOPING & DRAFTING</span></td>
-                <td><span class="badge-pill badge-purple">FAST CLASSIFICATION</span></td>
+                <td><strong>Architectural Role</strong></td>
+                <td><span class="badge-pill badge-cyan">DEEP SCOPING & RAG</span></td>
+                <td><span class="badge-pill badge-purple">FAST EMAIL ROUTING</span></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </main>
+  </div>
+
+  <!-- Lightbox Modal Scaffold -->
+  <div id="cyber-modal-container" class="cyber-modal-scaffold">
+    <div id="cyber-modal-body" class="cyber-modal-card"></div>
   </div>
 
   <script src="app.js"></script>

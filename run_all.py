@@ -36,8 +36,8 @@ signal.signal(signal.SIGTERM, cleanup)
 
 def main():
     print("=" * 80)
-    print("           AI TECH CONSULTANT — EXECUTIVE LAUNCHER")
-    print("   JD4 Capstone Architecture · BusinessLabs Applied AI Dev/Engineer")
+    print("           AI TECH CONSULTANT - EXECUTIVE LAUNCHER")
+    print("   JD4 Capstone Architecture - BusinessLabs Applied AI Dev/Engineer")
     print("=" * 80)
 
     # 1. Start Task 1: Knowledge Brain (Python FastAPI)
@@ -77,10 +77,10 @@ def main():
     print("\n" + "=" * 80)
     print("                  ALL SERVICES ARE LIVE AND CONNECTED!")
     print("=" * 80)
-    print("  ► Frontend Dashboard:    http://localhost:8000")
-    print("  ► Task 1 Knowledge Brain: http://localhost:8001/docs")
-    print("  ► Task 2 Inbox Agent:     http://localhost:8002/health")
-    print("  ► Task 3 Meeting-to-Scope: http://localhost:8003/docs")
+    print("  -> Frontend Dashboard:     http://localhost:8000")
+    print("  -> Task 1 Knowledge Brain: http://localhost:8001/docs")
+    print("  -> Task 2 Inbox Agent:     http://localhost:8002/health")
+    print("  -> Task 3 Meeting-to-Scope: http://localhost:8003/docs")
     print("=" * 80)
     print("Press Ctrl+C to terminate all services.\n")
 

@@ -5,7 +5,13 @@ Abstention & Escalation, Deactivation Handling, Latency & Cost across Models.
 """
 import time
 import json
+import sys
+from pathlib import Path
 from typing import List, Dict, Any
+
+# Ensure parent directory is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from app.database import db
 from retrieval.vector_store import vector_store
 from app.api.routes_query import synthesize_grounded_answer

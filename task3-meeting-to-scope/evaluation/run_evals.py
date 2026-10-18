@@ -6,8 +6,12 @@ Approval Enforcement, and Model Comparison.
 """
 import time
 import json
+import sys
 from pathlib import Path
 from typing import Dict, Any
+
+# Ensure parent directory is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.schemas import MeetingTranscript
 from agents.orchestrator import orchestrator

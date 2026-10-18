@@ -29,7 +29,11 @@ The application consists of three connected tasks sharing a single knowledge bra
    - Strict human approval barrier before proposal dispatch.
 
 4. **Executive Command Center Dashboard (`frontend-dashboard/`)**
-   - Cyber-modern HUD with animated particle canvas, section transitions, live telemetry, and interactive controls.
+   - High-contrast **Electric Yellow, Obsidian Black, and White** cyber aesthetic.
+   - Animated particle field, rotating yellow sonar radar, 3D card tilt, 5-agent circuit track, and Web Audio synthesizer.
+   - Built-in **Zero-Knowledge Operator Console** with 1-click test scenarios and guided walkthroughs.
+
+> 📖 **Zero-Knowledge Developer?** Read [ZERO_KNOWLEDGE_GUIDE.md](file:///e:/Project/business-labs/ZERO_KNOWLEDGE_GUIDE.md) for a complete step-by-step beginner masterclass.
 
 ---
 

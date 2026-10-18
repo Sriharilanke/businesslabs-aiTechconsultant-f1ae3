@@ -110,17 +110,17 @@ function initParticleField() {
   });
 
   const particles = [];
-  const count = Math.min(85, Math.floor(window.innerWidth / 16));
+  const count = Math.min(95, Math.floor(window.innerWidth / 15));
 
   for (let i = 0; i < count; i++) {
     particles.push({
       x: Math.random() * w,
       y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.7,
-      vy: (Math.random() - 0.5) * 0.7,
-      radius: Math.random() * 2.2 + 0.8,
-      baseRadius: Math.random() * 2.2 + 0.8,
-      color: Math.random() > 0.4 ? "rgba(0, 240, 255," : "rgba(176, 38, 255,"
+      vx: (Math.random() - 0.5) * 0.75,
+      vy: (Math.random() - 0.5) * 0.75,
+      radius: Math.random() * 2.4 + 0.8,
+      baseRadius: Math.random() * 2.4 + 0.8,
+      color: Math.random() > 0.4 ? "rgba(255, 230, 0," : (Math.random() > 0.5 ? "rgba(255, 183, 3," : "rgba(255, 255, 255,")
     });
   }
 
@@ -135,8 +135,26 @@ function initParticleField() {
     mouse.active = false;
   });
 
+  const shockwaves = [];
+  window.addEventListener("click", (e) => {
+    shockwaves.push({ x: e.clientX, y: e.clientY, r: 5, maxR: 120, alpha: 0.85 });
+  });
+
   function animate() {
     ctx.clearRect(0, 0, w, h);
+
+    // Draw and expand shockwaves
+    for (let s = shockwaves.length - 1; s >= 0; s--) {
+      const sw = shockwaves[s];
+      ctx.beginPath();
+      ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255, 230, 0, ${sw.alpha})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      sw.r += 4.5;
+      sw.alpha -= 0.025;
+      if (sw.alpha <= 0) shockwaves.splice(s, 1);
+    }
 
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
@@ -146,11 +164,11 @@ function initParticleField() {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 140) {
-          const force = (140 - dist) / 140;
-          p.x += (dx / dist) * force * 3.5;
-          p.y += (dy / dist) * force * 3.5;
-          p.radius = p.baseRadius * 1.8;
+        if (dist < 150) {
+          const force = (150 - dist) / 150;
+          p.x += (dx / dist) * force * 4.0;
+          p.y += (dy / dist) * force * 4.0;
+          p.radius = p.baseRadius * 2.0;
         } else {
           p.radius = p.baseRadius;
         }
@@ -166,8 +184,11 @@ function initParticleField() {
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + "0.65)";
+      ctx.fillStyle = p.color + "0.75)";
+      ctx.shadowColor = "#FFE600";
+      ctx.shadowBlur = 6;
       ctx.fill();
+      ctx.shadowBlur = 0;
 
       // Connect constellation lines
       for (let j = i + 1; j < particles.length; j++) {
@@ -176,11 +197,11 @@ function initParticleField() {
         const dy = p.y - p2.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 130) {
-          const alpha = 0.22 * (1 - dist / 130);
+        if (dist < 135) {
+          const alpha = 0.28 * (1 - dist / 135);
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
-          ctx.lineWidth = 0.8;
+          ctx.strokeStyle = `rgba(255, 230, 0, ${alpha})`;
+          ctx.lineWidth = 0.85;
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
           ctx.stroke();
@@ -956,6 +977,135 @@ function initEvalsMatrix() {
   }
 }
 
+// ==========================================================================
+// 9. ZERO-KNOWLEDGE OPERATOR HUB & INTERACTIVE 1-CLICK SCENARIOS
+// ==========================================================================
+function toggleExplainer(id) {
+  sfx.playClick();
+  const el = document.getElementById(id);
+  const icon = document.getElementById(id + "-icon");
+  if (!el) return;
+  const isHidden = el.style.display === "none";
+  el.style.display = isHidden ? "block" : "none";
+  if (icon) {
+    icon.innerText = isHidden ? "▲ Click to Collapse" : "▼ Click to Expand";
+  }
+}
+
+function openZeroKnowledgeTour() {
+  sfx.playChime();
+  const modal = document.getElementById("zero-knowledge-modal");
+  if (modal) modal.classList.add("active");
+}
+
+function closeZeroKnowledgeTour() {
+  sfx.playClick();
+  const modal = document.getElementById("zero-knowledge-modal");
+  if (modal) modal.classList.remove("active");
+}
+
+function initZeroKnowledgeOperatorHub() {
+  const tourBtn = document.getElementById("btn-open-tour");
+  if (tourBtn) tourBtn.onclick = openZeroKnowledgeTour;
+
+  // Scenario 1: Customer Refund Dispute
+  const testRefundBtn = document.getElementById("op-test-refund");
+  if (testRefundBtn) {
+    testRefundBtn.onclick = () => {
+      sfx.playClick();
+      const tab = document.querySelector('[data-target="section-inbox"]');
+      if (tab) tab.click();
+      setTimeout(() => {
+        const ticket = document.querySelector('[data-email-id="EMAIL-29"]') || document.querySelector('.ticket-item-card');
+        if (ticket) ticket.click();
+        sfx.playAlert();
+        window.scrollTo({ top: 300, behavior: "smooth" });
+      }, 350);
+    };
+  }
+
+  // Scenario 2: Screenshot RAG
+  const testRagBtn = document.getElementById("op-test-rag");
+  if (testRagBtn) {
+    testRagBtn.onclick = () => {
+      sfx.playClick();
+      const tab = document.querySelector('[data-target="section-kb"]');
+      if (tab) tab.click();
+      setTimeout(() => {
+        const input = document.getElementById("kb-chat-input");
+        const sendBtn = document.getElementById("kb-send-btn");
+        if (input && sendBtn) {
+          input.value = "How do administrators issue member refunds and what is the cancellation policy?";
+          sendBtn.click();
+          window.scrollTo({ top: 300, behavior: "smooth" });
+        }
+      }, 350);
+    };
+  }
+
+  // Scenario 3: Scope Creep Diff
+  const testScopeBtn = document.getElementById("op-test-scope");
+  if (testScopeBtn) {
+    testScopeBtn.onclick = () => {
+      sfx.playClick();
+      const tab = document.querySelector('[data-target="section-scope"]');
+      if (tab) tab.click();
+      setTimeout(() => {
+        const picker = document.getElementById("meeting-picker-select");
+        const runBtn = document.getElementById("run-multi-agent-pipeline-btn");
+        if (picker && runBtn) {
+          picker.value = "meeting_c";
+          runBtn.click();
+          window.scrollTo({ top: 300, behavior: "smooth" });
+        }
+      }, 350);
+    };
+  }
+
+  // Scenario 4: Run 66 Evals
+  const testEvalsBtn = document.getElementById("op-test-evals");
+  if (testEvalsBtn) {
+    testEvalsBtn.onclick = () => {
+      sfx.playClick();
+      const tab = document.querySelector('[data-target="section-evals"]');
+      if (tab) tab.click();
+      setTimeout(() => {
+        const runBtn = document.getElementById("master-evals-execute-btn");
+        if (runBtn) {
+          runBtn.click();
+          window.scrollTo({ top: 300, behavior: "smooth" });
+        }
+      }, 350);
+    };
+  }
+}
+
+// ==========================================================================
+// 10. 3D CARD TILT ON MOUSEMOVE
+// ==========================================================================
+function init3DCardTilt() {
+  const cards = document.querySelectorAll(".surface-glass, .autonomy-plasma-card, .showcase-header-card, .operator-station-bar");
+
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -3.5;
+      const rotateY = ((x - centerX) / centerX) * 3.5;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.008, 1.008, 1.008)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+    });
+  });
+}
+
 // Global Lifecycle Initializer
 window.addEventListener("DOMContentLoaded", () => {
   initParticleField();
@@ -965,4 +1115,6 @@ window.addEventListener("DOMContentLoaded", () => {
   initInboxAgent();
   initMeetingToScope();
   initEvalsMatrix();
+  initZeroKnowledgeOperatorHub();
+  init3DCardTilt();
 });

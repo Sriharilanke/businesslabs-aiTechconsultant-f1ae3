@@ -1,5 +1,8 @@
 # AI Tech Consultant (JD4 Capstone)
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FSriharilanke%2Fbusinesslabs-aiTechconsultant)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Sriharilanke/businesslabs-aiTechconsultant)
+
 An integrated, three-tier agentic system that automates repetitive technical consulting workflows for software and service companies. By connecting product documentation, email support, and client meeting scoping into a shared intelligence loop, the system accelerates consultant output by 10x to 20x.
 
 ---
@@ -65,6 +68,17 @@ python run_all.py
 | **Task 1: Knowledge Brain** | `8001` | [http://localhost:8001/docs](http://localhost:8001/docs) | Swagger API & RAG Query Service |
 | **Task 2: Inbox Agent** | `8002` | [http://localhost:8002/health](http://localhost:8002/health) | TypeScript Express Server |
 | **Task 3: Meeting-to-Scope** | `8003` | [http://localhost:8003/docs](http://localhost:8003/docs) | Multi-Agent Scoping Service |
+
+---
+
+## ☁️ One-Click Cloud Deployment (Vercel & Netlify)
+
+This project is pre-configured with root [`vercel.json`](./vercel.json) and [`netlify.toml`](./netlify.toml) files for zero-configuration, instant static deployment.
+
+- **Vercel:** Import your GitHub repository directly at [vercel.com/new](https://vercel.com/new) and click **Deploy**.
+- **Netlify:** Connect your repository at [app.netlify.com/start](https://app.netlify.com/start) and click **Deploy site**.
+
+> 📖 **Full Cloud Deployment Guide:** For step-by-step screenshots, CLI commands, and dual-mode architecture details, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ---
 

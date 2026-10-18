@@ -10,8 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Ambient Cyber Scanlines & CRT CRT Grid Vignette -->
+  <div class="scanlines-overlay"></div>
+
   <!-- Interactive Fluid Particle Constellation Canvas -->
   <canvas id="particle-canvas"></canvas>
+
+  <!-- Fireworks & Stardust Overlay Canvas -->
+  <canvas id="spark-canvas"></canvas>
 
   <div class="app-container">
     <!-- Top Executive Telemetry HUD Strip -->
@@ -23,7 +29,7 @@
           </svg>
         </div>
         <div>
-          <div class="brand-title">AI TECH CONSULTANT</div>
+          <div class="brand-title glitch-hover-text">AI TECH CONSULTANT</div>
           <div class="brand-subtitle">
             <span>JD4 CAPSTONE ARCHITECTURE</span>
             <span>·</span>
@@ -34,26 +40,30 @@
 
       <div class="hud-telemetry-cluster">
         <div class="hud-metric-pill">
+          <span class="hud-metric-label">Neural Oscilloscope</span>
+          <canvas id="hud-waveform-canvas"></canvas>
+        </div>
+        <div class="hud-metric-pill">
           <span class="hud-metric-label">System Time</span>
           <span id="hud-digital-clock" class="hud-metric-val" style="color:var(--text-primary); font-size:0.82rem;">12:00:00 UTC</span>
         </div>
         <div class="hud-metric-pill">
           <span class="hud-metric-label">Neural Throughput</span>
-          <span id="hud-tokens-sec" class="hud-metric-val" style="color:var(--accent-cyan);">1,420 tok/s</span>
+          <span id="hud-tokens-sec" class="hud-metric-val" style="color:var(--accent-yellow);">1,420 tok/s</span>
         </div>
         <div class="hud-metric-pill">
           <span class="hud-metric-label">Knowledge Engine</span>
-          <span class="hud-metric-val" style="color:var(--accent-emerald);">
+          <span class="hud-metric-val" style="color:#FFFFFF;">
             <span class="live-pulse-dot"></span> 17 Chunks (384-dim)
           </span>
         </div>
         <div class="hud-metric-pill">
           <span class="hud-metric-label">Autonomy Streak</span>
-          <span class="hud-metric-val" style="color:var(--accent-purple);">18 / 20 Approvals</span>
+          <span class="hud-metric-val" style="color:var(--accent-yellow);">18 / 20 Approvals</span>
         </div>
         <div class="hud-metric-pill">
           <span class="hud-metric-label">Evaluation Suite</span>
-          <span class="hud-metric-val" style="color:var(--text-gold);">66 / 66 Passed (100%)</span>
+          <span class="hud-metric-val" style="color:var(--accent-yellow); font-weight:800;">66 / 66 Passed</span>
         </div>
       </div>
 
@@ -197,6 +207,8 @@
 
             <!-- Animated Sonar Radar -->
             <div class="sonar-circle-wrapper">
+              <div class="sonar-coordinate-ring"></div>
+              <div class="sonar-pulse-ring"></div>
               <div class="sonar-concentric-1"></div>
               <div class="sonar-concentric-2"></div>
               <div class="sonar-sweep-beam"></div>
@@ -397,6 +409,9 @@
       <div class="agent-circuit-track">
         <div class="circuit-trace-line">
           <div class="circuit-packet"></div>
+          <div class="circuit-spark"></div>
+          <div class="circuit-spark"></div>
+          <div class="circuit-spark"></div>
         </div>
 
         <div class="agent-pod-node active">

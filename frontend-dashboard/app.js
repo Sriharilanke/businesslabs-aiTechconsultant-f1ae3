@@ -29,6 +29,7 @@ const appState = {
 class SoundFXEngine {
   constructor() {
     this.ctx = null;
+    this.audioEnergy = 0.2;
   }
 
   init() {
@@ -38,6 +39,7 @@ class SoundFXEngine {
   }
 
   playClick() {
+    this.audioEnergy = 0.9;
     if (!appState.soundEnabled) return;
     this.init();
     if (!this.ctx) return;
@@ -55,6 +57,7 @@ class SoundFXEngine {
   }
 
   playChime() {
+    this.audioEnergy = 1.6;
     if (!appState.soundEnabled) return;
     this.init();
     if (!this.ctx) return;
@@ -74,6 +77,7 @@ class SoundFXEngine {
   }
 
   playAlert() {
+    this.audioEnergy = 1.8;
     if (!appState.soundEnabled) return;
     this.init();
     if (!this.ctx) return;
@@ -240,8 +244,9 @@ function initTelemetryClock() {
 function initNavigation() {
   const tabs = document.querySelectorAll(".nav-card-tab");
   tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
+    tab.addEventListener("click", (e) => {
       sfx.playClick();
+      triggerSparkExplosion(e.clientX, e.clientY, 25);
       tabs.forEach((t) => t.classList.remove("active"));
       tab.classList.add("active");
 
@@ -254,6 +259,14 @@ function initNavigation() {
       if (targetPane) {
         targetPane.classList.add("active");
         appState.activeSection = targetId;
+
+        const h2 = targetPane.querySelector("h2");
+        if (h2) {
+          if (!h2.hasAttribute("data-orig-title")) {
+            h2.setAttribute("data-orig-title", h2.innerText);
+          }
+          scrambleTextEffect(h2, h2.getAttribute("data-orig-title"));
+        }
       }
     });
   });
@@ -799,8 +812,9 @@ async function initInboxAgent() {
   // Approve & Send button
   const approveSendBtn = document.getElementById("inbox-approve-send-btn");
   if (approveSendBtn) {
-    approveSendBtn.onclick = () => {
+    approveSendBtn.onclick = (e) => {
       sfx.playChime();
+      triggerSparkExplosion(e.clientX, e.clientY, 60);
       alert("Draft Approved! Feedback recorded into Learning Store with reviewer timestamp.");
       if (appState.activeStreak < 20) {
         appState.activeStreak++;
@@ -932,8 +946,9 @@ async function initMeetingToScope() {
   }
 
   if (approveBtn) {
-    approveBtn.onclick = () => {
+    approveBtn.onclick = (e) => {
       sfx.playChime();
+      triggerSparkExplosion(e.clientX, e.clientY, 75);
       if (sealContainer) {
         sealContainer.style.display = "inline-flex";
         sealContainer.className = "hologram-seal-stamp";
@@ -955,13 +970,14 @@ function initEvalsMatrix() {
   const evalsStatusText = document.getElementById("topology-live-ping-text");
 
   if (runEvalsBtn) {
-    runEvalsBtn.onclick = () => {
+    runEvalsBtn.onclick = (e) => {
       sfx.playClick();
       runEvalsBtn.disabled = true;
       runEvalsBtn.innerHTML = `<span class="live-pulse-dot"></span> Executing 66 Evals across Task 1, 2, and 3...`;
 
       setTimeout(() => {
         sfx.playChime();
+        triggerSparkExplosion(window.innerWidth / 2, window.innerHeight / 2, 85);
         runEvalsBtn.disabled = false;
         runEvalsBtn.innerText = "Re-Run All 66 Evaluations";
         if (evalsStatusText) {
@@ -975,6 +991,180 @@ function initEvalsMatrix() {
       }, 1400);
     };
   }
+}
+
+// ==========================================================================
+// 8B. NEURAL OSCILLOSCOPE REAL-TIME AUDIO VISUALIZER
+// ==========================================================================
+function initNeuralOscilloscope() {
+  const canvas = document.getElementById("hud-waveform-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  canvas.width = 110;
+  canvas.height = 28;
+
+  let phase = 0;
+
+  function renderWave() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const w = canvas.width;
+    const h = canvas.height;
+    const mid = h / 2;
+
+    // Decay audio energy smoothly towards idle baseline
+    sfx.audioEnergy = Math.max(0.18, sfx.audioEnergy * 0.94);
+    const amp = sfx.audioEnergy * (h / 2.3);
+
+    ctx.beginPath();
+    ctx.lineWidth = 1.6;
+    ctx.strokeStyle = "#FFE600";
+    ctx.shadowColor = "#FFE600";
+    ctx.shadowBlur = 8;
+
+    for (let x = 0; x < w; x++) {
+      const freq = 0.08;
+      const y = mid + Math.sin(x * freq + phase) * amp * Math.sin((x / w) * Math.PI);
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Draw secondary subtle white harmonic
+    ctx.beginPath();
+    ctx.lineWidth = 0.9;
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+    for (let x = 0; x < w; x++) {
+      const freq = 0.16;
+      const y = mid + Math.sin(x * freq - phase * 1.5) * (amp * 0.5) * Math.sin((x / w) * Math.PI);
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    phase += 0.12 + sfx.audioEnergy * 0.15;
+    requestAnimationFrame(renderWave);
+  }
+  renderWave();
+}
+
+// ==========================================================================
+// 8C. FIREWORKS CELEBRATION & STARDUST MOUSE WAKE
+// ==========================================================================
+let triggerSparkExplosion = () => {};
+
+function initSparkFireworksAndStardust() {
+  const canvas = document.getElementById("spark-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+
+  let w = (canvas.width = window.innerWidth);
+  let h = (canvas.height = window.innerHeight);
+
+  window.addEventListener("resize", () => {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  });
+
+  const sparks = [];
+
+  triggerSparkExplosion = function (x, y, count = 45) {
+    const originX = x || w / 2;
+    const originY = y || h / 2;
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 8 + 2;
+      sparks.push({
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - Math.random() * 2,
+        size: Math.random() * 3.4 + 1.2,
+        alpha: 1.0,
+        decay: Math.random() * 0.025 + 0.015,
+        color: Math.random() > 0.3 ? "#FFE600" : (Math.random() > 0.5 ? "#FFFFFF" : "#FFB703"),
+        gravity: 0.14
+      });
+    }
+  };
+
+  // Stardust mouse wake
+  window.addEventListener("mousemove", (e) => {
+    if (Math.random() > 0.45) {
+      sparks.push({
+        x: e.clientX + (Math.random() - 0.5) * 12,
+        y: e.clientY + (Math.random() - 0.5) * 12,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5 - 0.5,
+        size: Math.random() * 2.2 + 0.6,
+        alpha: 0.85,
+        decay: 0.04,
+        color: Math.random() > 0.4 ? "#FFE600" : "#FFFFFF",
+        gravity: 0.02
+      });
+    }
+  });
+
+  function renderSparks() {
+    ctx.clearRect(0, 0, w, h);
+
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      const s = sparks[i];
+      s.x += s.vx;
+      s.y += s.vy;
+      s.vy += s.gravity;
+      s.alpha -= s.decay;
+
+      if (s.alpha <= 0) {
+        sparks.splice(i, 1);
+        continue;
+      }
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      ctx.fillStyle = s.color;
+      ctx.globalAlpha = Math.max(0, s.alpha);
+      ctx.shadowColor = s.color;
+      ctx.shadowBlur = 6;
+      ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1.0;
+    requestAnimationFrame(renderSparks);
+  }
+  renderSparks();
+}
+
+// ==========================================================================
+// 8D. MATRIX HACKER TEXT SCRAMBLE DECODER
+// ==========================================================================
+function scrambleTextEffect(element, finalText, duration = 400) {
+  if (!element) return;
+  const chars = "!<>-_\\/[]{}—=+*^?#0123456789";
+  const start = Date.now();
+  const len = finalText.length;
+
+  const interval = setInterval(() => {
+    const elapsed = Date.now() - start;
+    const progress = Math.min(1, elapsed / duration);
+    const fixedCount = Math.floor(progress * len);
+
+    let result = "";
+    for (let i = 0; i < len; i++) {
+      if (i < fixedCount) {
+        result += finalText[i];
+      } else {
+        result += chars[Math.floor(Math.random() * chars.length)];
+      }
+    }
+    element.innerText = result;
+
+    if (progress >= 1) {
+      clearInterval(interval);
+      element.innerText = finalText;
+    }
+  }, 28);
 }
 
 // ==========================================================================
@@ -994,6 +1184,7 @@ function toggleExplainer(id) {
 
 function openZeroKnowledgeTour() {
   sfx.playChime();
+  triggerSparkExplosion(window.innerWidth / 2, window.innerHeight / 2, 55);
   const modal = document.getElementById("zero-knowledge-modal");
   if (modal) modal.classList.add("active");
 }
@@ -1011,8 +1202,9 @@ function initZeroKnowledgeOperatorHub() {
   // Scenario 1: Customer Refund Dispute
   const testRefundBtn = document.getElementById("op-test-refund");
   if (testRefundBtn) {
-    testRefundBtn.onclick = () => {
+    testRefundBtn.onclick = (e) => {
       sfx.playClick();
+      triggerSparkExplosion(e.clientX, e.clientY, 40);
       const tab = document.querySelector('[data-target="section-inbox"]');
       if (tab) tab.click();
       setTimeout(() => {
@@ -1027,8 +1219,9 @@ function initZeroKnowledgeOperatorHub() {
   // Scenario 2: Screenshot RAG
   const testRagBtn = document.getElementById("op-test-rag");
   if (testRagBtn) {
-    testRagBtn.onclick = () => {
+    testRagBtn.onclick = (e) => {
       sfx.playClick();
+      triggerSparkExplosion(e.clientX, e.clientY, 40);
       const tab = document.querySelector('[data-target="section-kb"]');
       if (tab) tab.click();
       setTimeout(() => {
@@ -1046,8 +1239,9 @@ function initZeroKnowledgeOperatorHub() {
   // Scenario 3: Scope Creep Diff
   const testScopeBtn = document.getElementById("op-test-scope");
   if (testScopeBtn) {
-    testScopeBtn.onclick = () => {
+    testScopeBtn.onclick = (e) => {
       sfx.playClick();
+      triggerSparkExplosion(e.clientX, e.clientY, 40);
       const tab = document.querySelector('[data-target="section-scope"]');
       if (tab) tab.click();
       setTimeout(() => {
@@ -1065,8 +1259,9 @@ function initZeroKnowledgeOperatorHub() {
   // Scenario 4: Run 66 Evals
   const testEvalsBtn = document.getElementById("op-test-evals");
   if (testEvalsBtn) {
-    testEvalsBtn.onclick = () => {
+    testEvalsBtn.onclick = (e) => {
       sfx.playClick();
+      triggerSparkExplosion(e.clientX, e.clientY, 40);
       const tab = document.querySelector('[data-target="section-evals"]');
       if (tab) tab.click();
       setTimeout(() => {
@@ -1081,18 +1276,28 @@ function initZeroKnowledgeOperatorHub() {
 }
 
 // ==========================================================================
-// 10. 3D CARD TILT ON MOUSEMOVE
+// 10. 3D CARD TILT ON MOUSEMOVE WITH SPECULAR GLARE
 // ==========================================================================
 function init3DCardTilt() {
   const cards = document.querySelectorAll(".surface-glass, .autonomy-plasma-card, .showcase-header-card, .operator-station-bar");
 
   cards.forEach((card) => {
+    // Add specular glare overlay if missing
+    if (!card.querySelector(".card-specular-glare")) {
+      const glare = document.createElement("div");
+      glare.className = "card-specular-glare";
+      card.appendChild(glare);
+    }
+
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
+
+      card.style.setProperty("--mouse-x", `${(x / rect.width) * 100}%`);
+      card.style.setProperty("--mouse-y", `${(y / rect.height) * 100}%`);
 
       const rotateX = ((y - centerY) / centerY) * -3.5;
       const rotateY = ((x - centerX) / centerX) * 3.5;
@@ -1109,6 +1314,8 @@ function init3DCardTilt() {
 // Global Lifecycle Initializer
 window.addEventListener("DOMContentLoaded", () => {
   initParticleField();
+  initSparkFireworksAndStardust();
+  initNeuralOscilloscope();
   initTelemetryClock();
   initNavigation();
   initKnowledgeBrain();
